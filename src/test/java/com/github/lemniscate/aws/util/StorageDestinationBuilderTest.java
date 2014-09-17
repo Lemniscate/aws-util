@@ -1,6 +1,5 @@
 package com.github.lemniscate.aws.util;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.Test;
@@ -11,6 +10,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class StorageDestinationBuilderTest {
+
+    private static final String ACCESS_KEY = System.getenv("AWS_ACCESS_KEY");
+    private static final String SECRET_KEY = System.getenv("AWS_SECRET_KEY");
+
 
     @Test
     public void testBuilding() throws IOException {
@@ -27,7 +30,7 @@ public class StorageDestinationBuilderTest {
                     .setAcl("public-read")
                     .setContentType("image/jpg")
                     .setRedirect("http://google.com?accessCode=5")
-                    .done("abc123", "super secret key")
+                    .done(ACCESS_KEY, SECRET_KEY)
                 .build()
                 ;
 
