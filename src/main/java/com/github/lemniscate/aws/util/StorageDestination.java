@@ -61,7 +61,8 @@ public class StorageDestination{
             if( !params.containsKey("Content-Type") ){
                 params.put("Content-Type", "");
             }
-            return new StorageDestination(bucket, "POST", expiration, params);
+            String url = String.format("https://%s.s3.amazonaws.com", bucket);
+            return new StorageDestination(url, "POST", expiration, params);
         }
 
     }
