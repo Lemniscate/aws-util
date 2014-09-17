@@ -70,9 +70,7 @@ public class StorageDestinationBuilder {
 
         public S3StoragePolicyBuilder(Date expiration, StorageDestinationBuilder sdBuilder) {
             this.sdBuilder = sdBuilder;
-            this.policyBuilder = new S3PolicyBuilder(expiration)
-                    // accept any file type by default
-                    .startsWith("Content-Type", "");
+            this.policyBuilder = new S3PolicyBuilder(expiration);
         }
 
         public S3StoragePolicyBuilder setBucket(String bucket){
@@ -86,7 +84,7 @@ public class StorageDestinationBuilder {
             return this;
         }
 
-        // TODO make this an enum
+        // TODO make this param an enum
         public S3StoragePolicyBuilder setAcl(String acl){
             policyBuilder.equality("acl", acl);
             sdBuilder.params.put("acl", acl);
@@ -94,7 +92,8 @@ public class StorageDestinationBuilder {
         }
 
         public S3StoragePolicyBuilder setContentType(String contentType){
-            policyBuilder.equality("Content-Type", contentType);
+            // TODO figure out why this doesn't work
+//            policyBuilder.startsWith("$Content-Type", contentType);
             sdBuilder.params.put("Content-Type", contentType);
             return this;
         }
@@ -104,7 +103,6 @@ public class StorageDestinationBuilder {
             sdBuilder.params.put("success_action_redirect", url);
             return this;
         }
-
 
         public StorageDestinationBuilder done(String accessKeyId, String secretKey){
             // TODO verify we have everything we need
