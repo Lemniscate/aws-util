@@ -4,9 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.Test;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -24,7 +22,7 @@ public class StorageDestinationBuilderTest {
         cal.add(Calendar.MONTH, 1);
         Date expiration = cal.getTime();
 
-        StorageDestinationBuilder.StorageDestination destination = new StorageDestinationBuilder()
+        StorageDestination destination = new StorageDestination.Builder()
                 .setKey("files/foobar/test.jpg")
                 .policyBuilder(expiration)
                     .setBucket("supertemporarybucket")
